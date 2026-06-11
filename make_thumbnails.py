@@ -257,15 +257,19 @@ def make_thumb3():
     draw.rectangle([0, 0, W//2, H], fill=(18,18,28))
 
     # Left content
-    draw.text((100, 140), "인증 심사일이", font=F("bold_kr",72), fill=(200,210,230))
-    draw.text((100, 228), "다가오면 알아서", font=F("bold_kr",72), fill=(255,255,255))
-    draw.text((100, 316), "담당자에게 자동 발송", font=F("bold_kr",64), fill=(100,120,255))
-    draw.text((100, 400), "FSC · ISO · 환경표지 · Vegan 전 인증 지원", font=F("ui_bold",24), fill=(160,170,200))
+    draw.text((100, 130), "심사 전날까지", font=F("bold_kr",78), fill=(200,210,230))
+    draw.text((100, 224), "까먹어도 괜찮아.", font=F("bold_kr",78), fill=(255,255,255))
 
-    draw.line([(100,448),(500,448)], fill=(100,120,255), width=2)
+    # accent underline
+    draw.line([(100, 316), (570, 316)], fill=(100,120,255), width=4)
 
-    draw.text((100, 470), "매일 오전 지정 시각에 D-day를 자동 체크",   font=F("reg_kr",22), fill=(200,210,230))
-    draw.text((100, 506), "중복 발송 방지 · SMTP 서버 직접 연동",       font=F("reg_kr",22), fill=(200,210,230))
+    draw.text((100, 338), "D-90부터 D-3까지, 알아서 챙겨드립니다", font=F("bold_kr",32), fill=(100,120,255))
+    draw.text((100, 392), "FSC · ISO · 환경표지 · Vegan  전 인증 커버", font=F("ui_reg",22), fill=(160,170,200))
+
+    draw.line([(100,444),(480,444)], fill=(60,60,100), width=1)
+
+    draw.text((100, 464), "매일 오전 자동 체크  →  해당 담당자에게 즉시 발송",   font=F("reg_kr",20), fill=(180,190,220))
+    draw.text((100, 498), "놓친 심사 0건.  당신은 그냥 준비만 하세요.",           font=F("bold_kr",20), fill=(255,255,255))
 
     # Timeline
     stages = [
@@ -288,10 +292,10 @@ def make_thumb3():
     # Right panel - email preview cards (실제 이메일 제목 기반)
     rx = W//2 + 60
     emails = [
-        ("[FSC CoC 인증] 사후심사 3개월 전 사전 안내",    "심사 예정일 확인 · 향후 일정 사전 공유",       "#34C759"),
-        ("[ISO 9001] 사후심사 일정 사전 안내",             "담당부서 자료 준비 요청 · 체크리스트 첨부",    "#007AFF"),
-        ("[환경표지인증] 내부심사 일정 안내 및 자료 요청", "내부심사 일정 확정 · 갱신 신청서류 준비",     "#FF9500"),
-        ("[FSC CoC 인증] ⚠️ 사후심사 D-3 최종 점검",     "심사 당일 준비 목록 · 긴급 연락처 안내",       "#FF3B30"),
+        ("[FSC CoC] 사후심사까지 90일 남았습니다",        "지금 시작하면 딱 맞아요. 일정 미리 공유드려요.",  "#34C759"),
+        ("[ISO 9001] 서류 준비, 지금이 적기입니다",        "60일 후 심사. 체크리스트 같이 확인해볼까요?",     "#007AFF"),
+        ("[환경표지] 내부심사 한 달 전, 잊지 않으셨죠?",  "담당자분들, 오늘 딱 한 번만 확인해주세요.",      "#FF9500"),
+        ("[FSC CoC] D-3. 이제 진짜 막판입니다 ⚠️",       "준비물 최종 체크 · 심사 당일 타임라인 안내",      "#FF3B30"),
     ]
     ey = 100
     for i, (title, body, color) in enumerate(emails):
@@ -319,11 +323,11 @@ def make_thumb3():
 
         draw.text((rx+28, ey+18), title, font=F("bold_kr",20), fill=(29,29,31))
         draw.text((rx+28, ey+58), body, font=F("reg_kr",17), fill=(110,110,115))
-        draw.text((rx+28, ey+90), "수신: 품질환경팀 · 생산팀 · 구매팀 담당자", font=F("reg_kr",15), fill=(180,180,190))
+        draw.text((rx+28, ey+90), "자동 발송  ·  수신: 품질환경팀 · 생산팀 · 구매팀", font=F("reg_kr",15), fill=(180,180,190))
         ey += 154
 
     # Bottom brand
-    draw.text((rx, H-60), "한솔제지(주) 천안공장  ·  품질환경팀 자동 발송 시스템", font=F("reg_kr",20), fill=(160,160,180))
+    draw.text((rx, H-60), "한솔제지(주) 천안공장  ·  인증 모니터링 시스템  ·  자동 발송 기능", font=F("reg_kr",20), fill=(160,160,180))
 
     img.save(f"{OUT}/thumb3_email.png", "PNG", optimize=True)
     print("thumb3 done")
