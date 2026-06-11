@@ -4,8 +4,16 @@ from datetime import date
 from utils.dday import calc_dday, get_alert_level, ALERT_COLORS, ALERT_LABELS, dday_label
 
 
-st.title("♻️ 환경표지인증(EL) 관리")
-st.caption("제품별 인증 유효기간(3년) · 사후관리(연 1회) 모니터링 — 발급기관: KEITI")
+@st.dialog("📄 환경표지인증 인증서 (샘플)", width="large")
+def show_cert():
+    st.caption("※ 실제 인증서 파일로 교체하여 사용하세요. 현재는 샘플 이미지입니다.")
+    st.image("data/certs/el_cert.svg", use_container_width=True)
+
+_t, _btn = st.columns([8, 2])
+_t.title("♻️ 환경표지인증(EL) 관리")
+_t.caption("제품별 인증 유효기간(3년) · 사후관리(연 1회) 모니터링 — 발급기관: KEITI")
+if _btn.button("📄 인증서 보기", use_container_width=True, key="el_cert_btn"):
+    show_cert()
 st.markdown('---')
 
 # ── 인증 소개 ──────────────────────────────────────────────
@@ -151,11 +159,6 @@ if not urgent.empty:
             f'font-size:13px;font-weight:600;margin-top:4px;">{label}</div>'
             f'</div></div>',
         )
-
-# ── 인증서 보기 ────────────────────────────────────────────
-with st.expander("📄 인증서 보기 (샘플)", expanded=False):
-    st.caption("※ 실제 인증서 파일로 교체하여 사용하세요. 현재는 샘플 이미지입니다.")
-    st.image("data/certs/el_cert.svg", use_container_width=True)
 
 # ── 안내 ──────────────────────────────────────────────────
 st.markdown('---')

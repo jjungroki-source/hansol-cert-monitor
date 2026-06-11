@@ -6,8 +6,16 @@ from utils.dday import calc_dday, get_alert_level, ALERT_COLORS, ALERT_LABELS, d
 from utils.fsc_checklist import FSC_CHECKLIST
 
 
-st.title("🌲 FSC CoC 인증 관리")
-st.caption("갱신심사(5년) · 사후심사(연 1회) 일정 및 심사 준비 체크리스트")
+@st.dialog("📄 FSC CoC 인증서 (샘플)", width="large")
+def show_cert():
+    st.caption("※ 실제 인증서 파일로 교체하여 사용하세요. 현재는 샘플 이미지입니다.")
+    st.image("data/certs/fsc_coc.svg", use_container_width=True)
+
+_t, _btn = st.columns([8, 2])
+_t.title("🌲 FSC CoC 인증 관리")
+_t.caption("갱신심사(5년) · 사후심사(연 1회) 일정 및 심사 준비 체크리스트")
+if _btn.button("📄 인증서 보기", use_container_width=True, key="fsc_cert_btn"):
+    show_cert()
 st.markdown('---')
 
 # ── 인증 소개 ──────────────────────────────────────────────
@@ -176,8 +184,3 @@ if changed:
     st.cache_data.clear()
     st.rerun()
 
-# ── 인증서 보기 ────────────────────────────────────────────
-st.markdown('---')
-with st.expander("📄 인증서 보기 (샘플)", expanded=False):
-    st.caption("※ 실제 인증서 파일로 교체하여 사용하세요. 현재는 샘플 이미지입니다.")
-    st.image("data/certs/fsc_coc.svg", use_container_width=True)

@@ -2,8 +2,18 @@
 from utils.dday import calc_dday, get_alert_level, ALERT_COLORS, ALERT_LABELS, dday_label
 
 
-st.title("4. Vegan 인증")
-st.caption("비건 인증 현황 및 심사 일정")
+@st.dialog("📄 Vegan 인증서 (샘플)", width="large")
+def show_cert(cert_file):
+    st.caption("※ 실제 인증서 파일로 교체하여 사용하세요. 현재는 샘플 이미지입니다.")
+    st.image(cert_file, use_container_width=True)
+
+_t, _btn = st.columns([8, 2])
+_t.title("4. Vegan 인증")
+_t.caption("비건 인증 현황 및 심사 일정")
+_vegan_sel = st.session_state.get("vegan_selected", None)
+_vegan_file = "data/certs/vegan_kv.svg" if _vegan_sel == "한국비건인증원 (KV)" else "data/certs/vegan_tvs.svg"
+if _btn.button("📄 인증서 보기", use_container_width=True, key="vegan_cert_btn"):
+    show_cert(_vegan_file)
 st.markdown('---')
 
 # ── 인증 소개 ──────────────────────────────────────────────
@@ -159,12 +169,6 @@ if selected and selected in VEGAN_INFO:
             f'</div>',
         )
 
-    # 인증서 보기
-    st.markdown('---')
-    cert_file = "data/certs/vegan_kv.svg" if selected == "한국비건인증원 (KV)" else "data/certs/vegan_tvs.svg"
-    with st.expander("📄 인증서 보기 (샘플)", expanded=False):
-        st.caption("※ 실제 인증서 파일로 교체하여 사용하세요. 현재는 샘플 이미지입니다.")
-        st.image(cert_file, use_container_width=True)
 
 else:
     st.html(
