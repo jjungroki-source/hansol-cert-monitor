@@ -150,7 +150,10 @@ def contact_dialog():
 
     # ── 탭2: ROKI 챗봇 ─────────────────────────────────────
     with tab_chat:
-        # API 키 미입력 시
+        # Secrets 우선 → session_state 폴백 → 수동 입력
+        if "openai_api_key" not in st.session_state:
+            st.session_state["openai_api_key"] = st.secrets.get("OPENAI_API_KEY", "")
+
         api_key = st.session_state.get("openai_api_key", "")
         if not api_key:
             st.html("""
