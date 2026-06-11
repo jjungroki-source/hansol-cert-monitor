@@ -52,8 +52,9 @@ ROKI는 "Recognition & Certification Knowledge Intelligence"의 약자입니다.
 
 [답변 원칙]
 - 아래 팩트에 명시된 내용만 답변합니다.
-- 팩트에 없는 내용은 "해당 내용은 제가 보유한 정보에 없습니다. 담당자에게 직접 문의해 주세요."라고 답변합니다.
-- 추정하거나 상상해서 답변하지 않습니다.
+- FSC, ISO, 환경표지인증, Vegan 인증 등 인증 전반에 관한 일반 지식은 자유롭게 답변합니다.
+- 회사 특정 정보(인증번호, 심사일, 담당자 등)는 반드시 아래 팩트 정보만 인용합니다.
+- 팩트에 없는 회사 특정 정보(예: 특정 직원 연락처, 내부 절차 세부사항)는 "담당자에게 직접 문의해 주세요."라고 안내합니다.
 - 답변은 한국어로 하며, 간결하고 명확하게 작성합니다.
 - 자기소개 시 "안녕하세요, 저는 ROKI입니다. 한솔제지 천안공장의 인증 전문 AI 어시스턴트입니다."라고 답변합니다.
 
@@ -171,7 +172,6 @@ def contact_dialog():
             )
             if new_key:
                 st.session_state["openai_api_key"] = new_key
-                st.rerun()
             st.caption("API 키를 입력하면 ROKI를 바로 사용할 수 있습니다.")
             st.stop()
 
@@ -179,7 +179,45 @@ def contact_dialog():
         if "chat_messages" not in st.session_state:
             st.session_state["chat_messages"] = []
 
-        # 대화 영역
+        # ── 입력 폼을 먼저 처리 (rerun 없이 같은 렌더 사이클에서 응답 포함) ──
+        with st.form("chat_form", clear_on_submit=True):
+            col_input, col_btn = st.columns([8, 1])
+            user_input = col_input.text_input(
+                "질문 입력",
+                placeholder="ROKI에게 인증 관련 질문을 입력하세요...",
+                label_visibility="collapsed",
+            )
+            submitted = col_btn.form_submit_button("↑", use_container_width=True)
+
+        if submitted and user_input.strip():
+            st.session_state["chat_messages"].append(
+                {"role": "user", "content": user_input.strip()}
+            )
+            messages = [{"role": "system", "content": SYSTEM_PROMPT}]
+            for m in st.session_state["chat_messages"][-10:]:
+                messages.append({"role": m["role"], "content": m["content"]})
+            try:
+                client = OpenAI(api_key=st.session_state["openai_api_key"])
+                response = client.chat.completions.create(
+                    model="gpt-4o-mini",
+                    messages=messages,
+                    temperature=0.3,
+                    max_tokens=800,
+                )
+                answer = response.choices[0].message.content
+            except Exception as e:
+                err = str(e)
+                if "invalid_api_key" in err or "Incorrect API key" in err:
+                    answer = "❌ API 키가 올바르지 않습니다. 키를 다시 확인해 주세요."
+                elif "quota" in err.lower() or "billing" in err.lower():
+                    answer = "❌ API 사용 한도 초과 또는 결제 정보 필요."
+                else:
+                    answer = f"❌ 오류: {err}"
+            st.session_state["chat_messages"].append(
+                {"role": "assistant", "content": answer}
+            )
+
+        # ── 대화 영역 (폼 처리 후 최신 메시지 포함해서 렌더) ──
         chat_area = st.container(height=330)
         with chat_area:
             if not st.session_state["chat_messages"]:
@@ -210,53 +248,9 @@ def contact_dialog():
                 with st.chat_message(msg["role"]):
                     st.markdown(msg["content"])
 
-        # 입력 폼
-        with st.form("chat_form", clear_on_submit=True):
-            col_input, col_btn = st.columns([8, 1])
-            user_input = col_input.text_input(
-                "질문 입력",
-                placeholder="ROKI에게 인증 관련 질문을 입력하세요...",
-                label_visibility="collapsed",
-            )
-            submitted = col_btn.form_submit_button("↑", use_container_width=True)
-
         col_clear, _ = st.columns([2, 8])
         if col_clear.button("대화 초기화", key="clear_chat"):
             st.session_state["chat_messages"] = []
-            st.rerun()
-
-        # GPT 호출
-        if submitted and user_input.strip():
-            st.session_state["chat_messages"].append(
-                {"role": "user", "content": user_input.strip()}
-            )
-
-            messages = [{"role": "system", "content": SYSTEM_PROMPT}]
-            for m in st.session_state["chat_messages"][-10:]:
-                messages.append({"role": m["role"], "content": m["content"]})
-
-            try:
-                client = OpenAI(api_key=st.session_state["openai_api_key"])
-                response = client.chat.completions.create(
-                    model="gpt-4o-mini",
-                    messages=messages,
-                    temperature=0,
-                    max_tokens=800,
-                )
-                answer = response.choices[0].message.content
-            except Exception as e:
-                err = str(e)
-                if "invalid_api_key" in err or "Incorrect API key" in err:
-                    answer = "❌ API 키가 올바르지 않습니다. 키를 다시 확인해 주세요."
-                elif "quota" in err.lower() or "billing" in err.lower():
-                    answer = "❌ API 사용 한도 초과 또는 결제 정보 필요. OpenAI 계정을 확인해 주세요."
-                else:
-                    answer = f"❌ 오류: {err}"
-
-            st.session_state["chat_messages"].append(
-                {"role": "assistant", "content": answer}
-            )
-            st.rerun()
 
 # ── 사이드바 헤더 ─────────────────────────────────────────────
 with st.sidebar:
