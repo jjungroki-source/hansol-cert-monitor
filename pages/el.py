@@ -152,6 +152,11 @@ if not urgent.empty:
             f'</div></div>',
         )
 
+# ── 인증서 보기 ────────────────────────────────────────────
+with st.expander("📄 인증서 보기 (샘플)", expanded=False):
+    st.caption("※ 실제 인증서 파일로 교체하여 사용하세요. 현재는 샘플 이미지입니다.")
+    st.image("data/certs/el_cert.svg", use_container_width=True)
+
 # ── 안내 ──────────────────────────────────────────────────
 st.markdown('---')
 with st.expander("ℹ️ 환경표지인증 갱신 안내"):

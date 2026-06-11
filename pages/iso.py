@@ -189,6 +189,13 @@ if selected and selected in ISO_INFO:
         f'</div>',
     )
 
+    # 인증서 보기
+    st.markdown('---')
+    cert_file = "data/certs/iso9001.svg" if selected == "ISO 9001" else "data/certs/iso14001.svg"
+    with st.expander("📄 인증서 보기 (샘플)", expanded=False):
+        st.caption("※ 실제 인증서 파일로 교체하여 사용하세요. 현재는 샘플 이미지입니다.")
+        st.image(cert_file, use_container_width=True)
+
 else:
     st.html(
         '<div style="text-align:center;color:#8E8E93;padding:48px 0;font-size:14px;">'

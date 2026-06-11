@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 420" width="600" height="420">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#F0FDF4"/>
+      <stop offset="100%" style="stop-color:#DCFCE7"/>
+    </linearGradient>
+    <linearGradient id="header" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#15803D"/>
+      <stop offset="100%" style="stop-color:#16A34A"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="420" fill="url(#bg)" rx="16"/>
+  <rect width="600" height="420" fill="none" stroke="#22C55E" stroke-width="3" rx="16"/>
+  <rect x="10" y="10" width="580" height="400" fill="none" stroke="#22C55E" stroke-width="1" stroke-dasharray="6,4" rx="12" opacity="0.4"/>
+  <rect width="600" height="90" fill="url(#header)" rx="16"/>
+  <rect y="74" width="600" height="16" fill="url(#header)"/>
+  <circle cx="54" cy="45" r="28" fill="white" opacity="0.15"/>
+  <text x="54" y="52" text-anchor="middle" font-family="Georgia,serif" font-size="22" fill="white">🌍</text>
+  <text x="300" y="32" text-anchor="middle" font-family="Georgia,serif" font-size="13" fill="white" opacity="0.85" letter-spacing="3">INTERNATIONAL ORGANIZATION FOR STANDARDIZATION</text>
+  <text x="300" y="58" text-anchor="middle" font-family="Georgia,serif" font-size="24" font-weight="bold" fill="white" letter-spacing="2">ISO 14001:2015</text>
+  <text x="300" y="78" text-anchor="middle" font-family="Arial,sans-serif" font-size="11" fill="white" opacity="0.75">환경경영시스템 인증서 · Environmental Management System Certificate</text>
+  <text x="300" y="128" text-anchor="middle" font-family="Arial,sans-serif" font-size="11" fill="#4B5563" letter-spacing="2">THIS IS TO CERTIFY THAT</text>
+  <text x="300" y="165" text-anchor="middle" font-family="Georgia,serif" font-size="26" font-weight="bold" fill="#14532D">한솔제지 주식회사</text>
+  <text x="300" y="185" text-anchor="middle" font-family="Arial,sans-serif" font-size="12" fill="#6B7280">Hansol Paper Co., Ltd. — Cheonan Factory</text>
+  <line x1="80" y1="195" x2="520" y2="195" stroke="#22C55E" stroke-width="1" opacity="0.4"/>
+  <text x="300" y="218" text-anchor="middle" font-family="Arial,sans-serif" font-size="11" fill="#4B5563">has been assessed and found to conform to the requirements of</text>
+  <text x="300" y="242" text-anchor="middle" font-family="Georgia,serif" font-size="17" font-weight="bold" fill="#15803D">ISO 14001:2015   ·   EMS-2023-00456</text>
+  <text x="300" y="260" text-anchor="middle" font-family="Arial,sans-serif" font-size="11" fill="#6B7280">천안공장 제지 생산 전 공정의 환경경영 활동</text>
+  <rect x="60" y="275" width="210" height="62" fill="white" rx="8" opacity="0.8"/>
+  <text x="165" y="295" text-anchor="middle" font-family="Arial,sans-serif" font-size="10" fill="#6B7280" letter-spacing="1">인증 기간</text>
+  <text x="165" y="315" text-anchor="middle" font-family="Arial,sans-serif" font-size="13" font-weight="bold" fill="#14532D">2023-03-15</text>
+  <text x="165" y="330" text-anchor="middle" font-family="Arial,sans-serif" font-size="13" font-weight="bold" fill="#14532D">~ 2026-03-14</text>
+  <rect x="330" y="275" width="210" height="62" fill="white" rx="8" opacity="0.8"/>
+  <text x="435" y="295" text-anchor="middle" font-family="Arial,sans-serif" font-size="10" fill="#6B7280" letter-spacing="1">인증기관</text>
+  <text x="435" y="315" text-anchor="middle" font-family="Arial,sans-serif" font-size="13" font-weight="bold" fill="#14532D">Bureau Veritas Korea</text>
+  <text x="435" y="330" text-anchor="middle" font-family="Arial,sans-serif" font-size="10" fill="#6B7280">Accredited by KAB</text>
+  <line x1="60" y1="358" x2="240" y2="358" stroke="#9CA3AF" stroke-width="1"/>
+  <text x="150" y="374" text-anchor="middle" font-family="Arial,sans-serif" font-size="10" fill="#6B7280">Certification Manager</text>
+  <text x="150" y="388" text-anchor="middle" font-family="Arial,sans-serif" font-size="10" font-weight="bold" fill="#374151">Bureau Veritas Korea</text>
+  <line x1="360" y1="358" x2="540" y2="358" stroke="#9CA3AF" stroke-width="1"/>
+  <text x="450" y="374" text-anchor="middle" font-family="Arial,sans-serif" font-size="10" fill="#6B7280">Issue Date</text>
+  <text x="450" y="388" text-anchor="middle" font-family="Arial,sans-serif" font-size="10" font-weight="bold" fill="#374151">2023-03-15</text>
+  <text x="300" y="230" text-anchor="middle" font-family="Arial,sans-serif" font-size="72" font-weight="bold" fill="#22C55E" opacity="0.04" transform="rotate(-30 300 230)">SAMPLE</text>
+  <text x="300" y="412" text-anchor="middle" font-family="Arial,sans-serif" font-size="9" fill="#9CA3AF">※ 본 인증서는 시스템 표시용 샘플입니다. 실제 인증서로 사용 불가.</text>
+</svg>

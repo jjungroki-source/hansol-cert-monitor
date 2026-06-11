@@ -159,6 +159,13 @@ if selected and selected in VEGAN_INFO:
             f'</div>',
         )
 
+    # 인증서 보기
+    st.markdown('---')
+    cert_file = "data/certs/vegan_kv.svg" if selected == "한국비건인증원 (KV)" else "data/certs/vegan_tvs.svg"
+    with st.expander("📄 인증서 보기 (샘플)", expanded=False):
+        st.caption("※ 실제 인증서 파일로 교체하여 사용하세요. 현재는 샘플 이미지입니다.")
+        st.image(cert_file, use_container_width=True)
+
 else:
     st.html(
         '<div style="text-align:center;color:#8E8E93;padding:48px 0;font-size:14px;">'

@@ -175,3 +175,9 @@ if changed:
     st.success(f"{len(changed)}건 상태가 업데이트되었습니다.")
     st.cache_data.clear()
     st.rerun()
+
+# ── 인증서 보기 ────────────────────────────────────────────
+st.markdown('---')
+with st.expander("📄 인증서 보기 (샘플)", expanded=False):
+    st.caption("※ 실제 인증서 파일로 교체하여 사용하세요. 현재는 샘플 이미지입니다.")
+    st.image("data/certs/fsc_coc.svg", use_container_width=True)

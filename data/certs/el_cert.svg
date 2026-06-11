@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 420" width="600" height="420">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ECFDF5"/>
+      <stop offset="100%" style="stop-color:#D1FAE5"/>
+    </linearGradient>
+    <linearGradient id="header" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#065F46"/>
+      <stop offset="100%" style="stop-color:#047857"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="420" fill="url(#bg)" rx="16"/>
+  <rect width="600" height="420" fill="none" stroke="#10B981" stroke-width="3" rx="16"/>
+  <rect x="10" y="10" width="580" height="400" fill="none" stroke="#10B981" stroke-width="1" stroke-dasharray="6,4" rx="12" opacity="0.4"/>
+  <rect width="600" height="90" fill="url(#header)" rx="16"/>
+  <rect y="74" width="600" height="16" fill="url(#header)"/>
+  <circle cx="54" cy="45" r="28" fill="white" opacity="0.15"/>
+  <text x="54" y="52" text-anchor="middle" font-family="Georgia,serif" font-size="22" fill="white">♻️</text>
+  <text x="300" y="28" text-anchor="middle" font-family="Georgia,serif" font-size="11" fill="white" opacity="0.85" letter-spacing="2">환경부 · KOREA MINISTRY OF ENVIRONMENT</text>
+  <text x="300" y="56" text-anchor="middle" font-family="Georgia,serif" font-size="24" font-weight="bold" fill="white" letter-spacing="1">환경표지인증서</text>
+  <text x="300" y="78" text-anchor="middle" font-family="Arial,sans-serif" font-size="11" fill="white" opacity="0.75">EL (Eco-Label) Certificate · 한국환경산업기술원 발급</text>
+  <text x="300" y="128" text-anchor="middle" font-family="Arial,sans-serif" font-size="11" fill="#4B5563" letter-spacing="2">아래와 같이 환경표지 인증을 부여합니다</text>
+  <text x="300" y="165" text-anchor="middle" font-family="Georgia,serif" font-size="26" font-weight="bold" fill="#064E3B">한솔제지 주식회사</text>
+  <text x="300" y="185" text-anchor="middle" font-family="Arial,sans-serif" font-size="12" fill="#6B7280">Hansol Paper Co., Ltd. — 천안공장</text>
+  <line x1="80" y1="195" x2="520" y2="195" stroke="#10B981" stroke-width="1" opacity="0.4"/>
+  <text x="300" y="218" text-anchor="middle" font-family="Arial,sans-serif" font-size="11" fill="#4B5563">다음 제품이 환경표지 인증기준을 충족함을 인증합니다</text>
+  <text x="300" y="242" text-anchor="middle" font-family="Georgia,serif" font-size="16" font-weight="bold" fill="#065F46">EL724   ·   인쇄용지류 · 복사용지류</text>
+  <text x="300" y="260" text-anchor="middle" font-family="Arial,sans-serif" font-size="11" fill="#6B7280">한솔 에코 복사용지 A4 80g 外 다수 제품</text>
+  <rect x="60" y="275" width="210" height="62" fill="white" rx="8" opacity="0.8"/>
+  <text x="165" y="295" text-anchor="middle" font-family="Arial,sans-serif" font-size="10" fill="#6B7280" letter-spacing="1">인증 유효기간</text>
+  <text x="165" y="315" text-anchor="middle" font-family="Arial,sans-serif" font-size="13" font-weight="bold" fill="#064E3B">2023-06-01</text>
+  <text x="165" y="330" text-anchor="middle" font-family="Arial,sans-serif" font-size="13" font-weight="bold" fill="#064E3B">~ 2026-05-31</text>
+  <rect x="330" y="275" width="210" height="62" fill="white" rx="8" opacity="0.8"/>
+  <text x="435" y="295" text-anchor="middle" font-family="Arial,sans-serif" font-size="10" fill="#6B7280" letter-spacing="1">발급기관</text>
+  <text x="435" y="312" text-anchor="middle" font-family="Arial,sans-serif" font-size="12" font-weight="bold" fill="#064E3B">한국환경산업기술원</text>
+  <text x="435" y="330" text-anchor="middle" font-family="Arial,sans-serif" font-size="10" fill="#6B7280">Korea Environmental Industry &amp; Technology Institute</text>
+  <line x1="60" y1="358" x2="240" y2="358" stroke="#9CA3AF" stroke-width="1"/>
+  <text x="150" y="374" text-anchor="middle" font-family="Arial,sans-serif" font-size="10" fill="#6B7280">원장</text>
+  <text x="150" y="388" text-anchor="middle" font-family="Arial,sans-serif" font-size="10" font-weight="bold" fill="#374151">한국환경산업기술원</text>
+  <line x1="360" y1="358" x2="540" y2="358" stroke="#9CA3AF" stroke-width="1"/>
+  <text x="450" y="374" text-anchor="middle" font-family="Arial,sans-serif" font-size="10" fill="#6B7280">발급일</text>
+  <text x="450" y="388" text-anchor="middle" font-family="Arial,sans-serif" font-size="10" font-weight="bold" fill="#374151">2023-06-01</text>
+  <text x="300" y="230" text-anchor="middle" font-family="Arial,sans-serif" font-size="72" font-weight="bold" fill="#10B981" opacity="0.04" transform="rotate(-30 300 230)">SAMPLE</text>
+  <text x="300" y="412" text-anchor="middle" font-family="Arial,sans-serif" font-size="9" fill="#9CA3AF">※ 본 인증서는 시스템 표시용 샘플입니다. 실제 인증서로 사용 불가.</text>
+</svg>

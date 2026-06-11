@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 420" width="600" height="420">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#F0FFF4"/>
+      <stop offset="100%" style="stop-color:#DCFCE7"/>
+    </linearGradient>
+    <linearGradient id="header" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#166534"/>
+      <stop offset="100%" style="stop-color:#15803D"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="600" height="420" fill="url(#bg)" rx="16"/>
+  <rect width="600" height="420" fill="none" stroke="#16A34A" stroke-width="3" rx="16"/>
+  <rect x="10" y="10" width="580" height="400" fill="none" stroke="#16A34A" stroke-width="1" stroke-dasharray="6,4" rx="12" opacity="0.4"/>
+
+  <!-- Header -->
+  <rect width="600" height="90" fill="url(#header)" rx="16"/>
+  <rect y="74" width="600" height="16" fill="url(#header)"/>
+
+  <!-- FSC Logo area -->
+  <circle cx="54" cy="45" r="28" fill="white" opacity="0.15"/>
+  <text x="54" y="52" text-anchor="middle" font-family="Georgia,serif" font-size="22" font-weight="bold" fill="white">🌲</text>
+
+  <!-- Header text -->
+  <text x="300" y="32" text-anchor="middle" font-family="Georgia,serif" font-size="13" fill="white" opacity="0.85" letter-spacing="3">FOREST STEWARDSHIP COUNCIL</text>
+  <text x="300" y="58" text-anchor="middle" font-family="Georgia,serif" font-size="22" font-weight="bold" fill="white" letter-spacing="1">CERTIFICATE OF CHAIN OF CUSTODY</text>
+  <text x="300" y="78" text-anchor="middle" font-family="Arial,sans-serif" font-size="11" fill="white" opacity="0.75">산림관리협의회 공급망관리 인증서</text>
+
+  <!-- Body -->
+  <text x="300" y="128" text-anchor="middle" font-family="Arial,sans-serif" font-size="11" fill="#4B5563" letter-spacing="2">THIS IS TO CERTIFY THAT</text>
+
+  <!-- Company name -->
+  <text x="300" y="165" text-anchor="middle" font-family="Georgia,serif" font-size="26" font-weight="bold" fill="#14532D">한솔제지 주식회사</text>
+  <text x="300" y="185" text-anchor="middle" font-family="Arial,sans-serif" font-size="12" fill="#6B7280">Hansol Paper Co., Ltd. — Cheonan Factory</text>
+
+  <line x1="80" y1="195" x2="520" y2="195" stroke="#16A34A" stroke-width="1" opacity="0.4"/>
+
+  <text x="300" y="218" text-anchor="middle" font-family="Arial,sans-serif" font-size="11" fill="#4B5563">has been assessed and found to conform to the requirements of</text>
+  <text x="300" y="242" text-anchor="middle" font-family="Georgia,serif" font-size="18" font-weight="bold" fill="#15803D">FSC® C012345   ·   FSC-STD-40-004</text>
+
+  <!-- Info boxes -->
+  <rect x="60" y="265" width="210" height="62" fill="white" rx="8" opacity="0.8"/>
+  <text x="165" y="285" text-anchor="middle" font-family="Arial,sans-serif" font-size="10" fill="#6B7280" letter-spacing="1">인증 기간</text>
+  <text x="165" y="305" text-anchor="middle" font-family="Arial,sans-serif" font-size="13" font-weight="bold" fill="#14532D">2022-01-01</text>
+  <text x="165" y="320" text-anchor="middle" font-family="Arial,sans-serif" font-size="13" font-weight="bold" fill="#14532D">~ 2027-12-31</text>
+
+  <rect x="330" y="265" width="210" height="62" fill="white" rx="8" opacity="0.8"/>
+  <text x="435" y="285" text-anchor="middle" font-family="Arial,sans-serif" font-size="10" fill="#6B7280" letter-spacing="1">인증기관</text>
+  <text x="435" y="305" text-anchor="middle" font-family="Arial,sans-serif" font-size="13" font-weight="bold" fill="#14532D">SGS Korea Co., Ltd.</text>
+  <text x="435" y="320" text-anchor="middle" font-family="Arial,sans-serif" font-size="10" fill="#6B7280">Accredited by ASI</text>
+
+  <!-- Footer -->
+  <line x1="60" y1="352" x2="240" y2="352" stroke="#9CA3AF" stroke-width="1"/>
+  <text x="150" y="368" text-anchor="middle" font-family="Arial,sans-serif" font-size="10" fill="#6B7280">Certification Manager</text>
+  <text x="150" y="382" text-anchor="middle" font-family="Arial,sans-serif" font-size="10" font-weight="bold" fill="#374151">SGS Korea</text>
+
+  <line x1="360" y1="352" x2="540" y2="352" stroke="#9CA3AF" stroke-width="1"/>
+  <text x="450" y="368" text-anchor="middle" font-family="Arial,sans-serif" font-size="10" fill="#6B7280">Issue Date</text>
+  <text x="450" y="382" text-anchor="middle" font-family="Arial,sans-serif" font-size="10" font-weight="bold" fill="#374151">2022-01-01</text>
+
+  <!-- Sample watermark -->
+  <text x="300" y="230" text-anchor="middle" font-family="Arial,sans-serif" font-size="72" font-weight="bold" fill="#16A34A" opacity="0.04" transform="rotate(-30 300 230)">SAMPLE</text>
+
+  <!-- Bottom note -->
+  <text x="300" y="408" text-anchor="middle" font-family="Arial,sans-serif" font-size="9" fill="#9CA3AF">※ 본 인증서는 시스템 표시용 샘플입니다. 실제 인증서로 사용 불가.</text>
+</svg>

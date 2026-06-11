@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 420" width="600" height="420">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#EFF6FF"/>
+      <stop offset="100%" style="stop-color:#DBEAFE"/>
+    </linearGradient>
+    <linearGradient id="header" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#1D4ED8"/>
+      <stop offset="100%" style="stop-color:#2563EB"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="420" fill="url(#bg)" rx="16"/>
+  <rect width="600" height="420" fill="none" stroke="#3B82F6" stroke-width="3" rx="16"/>
+  <rect x="10" y="10" width="580" height="400" fill="none" stroke="#3B82F6" stroke-width="1" stroke-dasharray="6,4" rx="12" opacity="0.4"/>
+  <rect width="600" height="90" fill="url(#header)" rx="16"/>
+  <rect y="74" width="600" height="16" fill="url(#header)"/>
+  <circle cx="54" cy="45" r="28" fill="white" opacity="0.15"/>
+  <text x="54" y="52" text-anchor="middle" font-family="Georgia,serif" font-size="22" fill="white">🏆</text>
+  <text x="300" y="32" text-anchor="middle" font-family="Georgia,serif" font-size="13" fill="white" opacity="0.85" letter-spacing="3">INTERNATIONAL ORGANIZATION FOR STANDARDIZATION</text>
+  <text x="300" y="58" text-anchor="middle" font-family="Georgia,serif" font-size="24" font-weight="bold" fill="white" letter-spacing="2">ISO 9001:2015</text>
+  <text x="300" y="78" text-anchor="middle" font-family="Arial,sans-serif" font-size="11" fill="white" opacity="0.75">품질경영시스템 인증서 · Quality Management System Certificate</text>
+  <text x="300" y="128" text-anchor="middle" font-family="Arial,sans-serif" font-size="11" fill="#4B5563" letter-spacing="2">THIS IS TO CERTIFY THAT</text>
+  <text x="300" y="165" text-anchor="middle" font-family="Georgia,serif" font-size="26" font-weight="bold" fill="#1E3A8A">한솔제지 주식회사</text>
+  <text x="300" y="185" text-anchor="middle" font-family="Arial,sans-serif" font-size="12" fill="#6B7280">Hansol Paper Co., Ltd. — Cheonan Factory</text>
+  <line x1="80" y1="195" x2="520" y2="195" stroke="#3B82F6" stroke-width="1" opacity="0.4"/>
+  <text x="300" y="218" text-anchor="middle" font-family="Arial,sans-serif" font-size="11" fill="#4B5563">has been assessed and found to conform to the requirements of</text>
+  <text x="300" y="242" text-anchor="middle" font-family="Georgia,serif" font-size="17" font-weight="bold" fill="#1D4ED8">ISO 9001:2015   ·   QMS-2022-00123</text>
+  <text x="300" y="260" text-anchor="middle" font-family="Arial,sans-serif" font-size="11" fill="#6B7280">인쇄용지, 복사용지, 특수지 제조 및 품질관리</text>
+  <rect x="60" y="275" width="210" height="62" fill="white" rx="8" opacity="0.8"/>
+  <text x="165" y="295" text-anchor="middle" font-family="Arial,sans-serif" font-size="10" fill="#6B7280" letter-spacing="1">인증 기간</text>
+  <text x="165" y="315" text-anchor="middle" font-family="Arial,sans-serif" font-size="13" font-weight="bold" fill="#1E3A8A">2022-09-01</text>
+  <text x="165" y="330" text-anchor="middle" font-family="Arial,sans-serif" font-size="13" font-weight="bold" fill="#1E3A8A">~ 2025-08-31</text>
+  <rect x="330" y="275" width="210" height="62" fill="white" rx="8" opacity="0.8"/>
+  <text x="435" y="295" text-anchor="middle" font-family="Arial,sans-serif" font-size="10" fill="#6B7280" letter-spacing="1">인증기관</text>
+  <text x="435" y="315" text-anchor="middle" font-family="Arial,sans-serif" font-size="13" font-weight="bold" fill="#1E3A8A">KR Co., Ltd.</text>
+  <text x="435" y="330" text-anchor="middle" font-family="Arial,sans-serif" font-size="10" fill="#6B7280">Accredited by KAB</text>
+  <line x1="60" y1="358" x2="240" y2="358" stroke="#9CA3AF" stroke-width="1"/>
+  <text x="150" y="374" text-anchor="middle" font-family="Arial,sans-serif" font-size="10" fill="#6B7280">Certification Manager</text>
+  <text x="150" y="388" text-anchor="middle" font-family="Arial,sans-serif" font-size="10" font-weight="bold" fill="#374151">KR Co., Ltd.</text>
+  <line x1="360" y1="358" x2="540" y2="358" stroke="#9CA3AF" stroke-width="1"/>
+  <text x="450" y="374" text-anchor="middle" font-family="Arial,sans-serif" font-size="10" fill="#6B7280">Issue Date</text>
+  <text x="450" y="388" text-anchor="middle" font-family="Arial,sans-serif" font-size="10" font-weight="bold" fill="#374151">2022-09-01</text>
+  <text x="300" y="230" text-anchor="middle" font-family="Arial,sans-serif" font-size="72" font-weight="bold" fill="#3B82F6" opacity="0.04" transform="rotate(-30 300 230)">SAMPLE</text>
+  <text x="300" y="412" text-anchor="middle" font-family="Arial,sans-serif" font-size="9" fill="#9CA3AF">※ 본 인증서는 시스템 표시용 샘플입니다. 실제 인증서로 사용 불가.</text>
+</svg>
