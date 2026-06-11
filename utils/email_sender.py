@@ -148,6 +148,75 @@ def _closing() -> str:
     )
 
 
+# ── FSC 사후심사 D-90 공지 (3달 전) ──────────────────────
+
+def fsc_d90(audit_date: str, cert_no: str, cert_period: str) -> tuple:
+    subject = f"[FSC CoC 인증] 사후심사 3개월 전 사전 안내 · 심사 예정일 {audit_date}"
+    body = (
+        _greeting("오는 FSC CoC 인증 사후심사 일정이 약 3개월 앞으로 다가왔음을 안내 드립니다.")
+        + _info_table([
+            ("심사 유형",   "FSC CoC 사후심사 (연 1회)"),
+            ("심사 예정일", f"<strong>{audit_date}</strong>"),
+            ("인증번호",    cert_no),
+            ("인증 기간",   cert_period),
+            ("심사기관",    "SGS Korea"),
+        ])
+        + _callout(
+            "📅 &nbsp;심사까지 <strong>약 3개월</strong>이 남았습니다. "
+            "지금부터 부서별 관련 서류를 점검하고 준비를 시작해 주시기 바랍니다.",
+            "#34C759", "#F0FFF4"
+        )
+        + _section("3개월 전 사전 점검 사항", [
+            "FSC 인증 원료 구매·생산·판매 실적 기록 현황 점검",
+            "공급사 인증 유효기간 사전 확인 (info.fsc.org)",
+            "COC 교육훈련 기록 최신화 필요 여부 파악",
+            "작년 심사 지적사항 시정조치 완료 여부 재확인",
+            "인증 마크 사용 현황 및 홍보물 점검",
+        ])
+        + _section("향후 일정 안내", [
+            f"D-60 (심사 2개월 전): 부서별 자료 요청 및 상세 준비사항 안내 예정",
+            f"D-30 (심사 1개월 전): 내부심사 일정 및 최종 서류 제출 요청 예정",
+            f"D-3  (심사 3일 전):  최종 점검 사항 및 당일 일정 안내 예정",
+        ])
+        + _closing()
+    )
+    return subject, _wrap("FSC CoC 인증 사후심사 일정 안내 (D-90)", body, "#34C759")
+
+
+# ── FSC 사후심사 D-3 최종 점검 (3일 전) ──────────────────
+
+def fsc_d3(audit_date: str) -> tuple:
+    subject = f"[FSC CoC 인증] ⚠️ 사후심사 D-3 · 최종 점검 안내 · {audit_date}"
+    body = (
+        _greeting(f"FSC CoC 인증 사후심사가 <strong>{audit_date}</strong>, 이제 3일 앞으로 다가왔습니다.")
+        + _callout(
+            f"🚨 &nbsp;<strong>심사일: {audit_date}</strong> — 3일 후입니다. "
+            "아래 최종 점검 사항을 반드시 확인해 주십시오.",
+            "#FF3B30", "#FFF2F1"
+        )
+        + _section("심사 당일 필수 준비사항 (최종 점검)", [
+            "모든 제출 서류 최종본 인쇄·정리 완료 확인",
+            "인증 원료 보관 현장 상태 최종 점검 (표식, 분리 보관)",
+            "심사원 방문 동선 및 담당자 대기 여부 확인",
+            "직원 인터뷰 대비 — COC 절차 및 개인별 역할 재숙지",
+            "부적합 사항 시정조치 증빙서류 최종 완비 확인",
+            "인증 마크 사용 현황 및 샘플 파일 최종 확인",
+        ])
+        + _section("심사 당일 일정 안내", [
+            "심사원 도착 시 품질환경팀 장정록 책임 연락 (041-000-0000)",
+            "오전: 서류 심사 / 오후: 현장 심사 (예상 일정)",
+            "심사 종료 후 종결회의 — 담당 부서장 참석 권장",
+        ])
+        + _callout(
+            "📞 &nbsp;당일 부재 또는 긴급 상황 발생 시 즉시 "
+            "<strong>장정록 책임 (041-000-0000)</strong>으로 연락해 주시기 바랍니다.",
+            "#007AFF", "#F0F7FF"
+        )
+        + _closing()
+    )
+    return subject, _wrap("FSC CoC 인증 사후심사 D-3 최종 점검", body, "#FF3B30")
+
+
 # ── FSC 사후심사 D-60 공지 ────────────────────────────────
 
 def fsc_d60(audit_date: str, cert_no: str, cert_period: str, doc_deadline: str) -> tuple:
@@ -220,6 +289,74 @@ def fsc_d30(audit_date: str, internal_date: str) -> tuple:
         + _closing()
     )
     return subject, _wrap("FSC CoC 인증 내부심사 안내 및 자료 요청 (D-30)", body, "#34C759")
+
+
+# ── ISO 사후심사 D-90 공지 (3달 전) ──────────────────────
+
+def iso_d90(iso_type: str, audit_date: str, cert_no: str, cert_period: str) -> tuple:
+    is_9001  = "9001" in iso_type
+    accent   = "#007AFF" if is_9001 else "#34C759"
+    sys_name = "품질경영시스템(QMS)" if is_9001 else "환경경영시스템(EMS)"
+    subject = f"[{iso_type}] 사후심사 3개월 전 사전 안내 · 심사 예정일 {audit_date}"
+    body = (
+        _greeting(f"{iso_type} {sys_name} 사후심사 일정이 약 3개월 앞으로 다가왔음을 안내 드립니다.")
+        + _info_table([
+            ("심사 유형",   f"{iso_type} {sys_name} 사후심사"),
+            ("심사 예정일", f"<strong>{audit_date}</strong>"),
+            ("인증번호",    cert_no),
+            ("인증 기간",   cert_period),
+        ])
+        + _callout(
+            f"📅 &nbsp;<strong>{iso_type}</strong> 심사까지 약 3개월이 남았습니다. "
+            "지금부터 부서별 관련 서류를 점검하고 준비를 시작해 주시기 바랍니다.",
+            accent, "#F5F5F7"
+        )
+        + _section("3개월 전 사전 점검 사항", [
+            "작년 심사 지적사항(부적합) 시정조치 완료 여부 재확인",
+            "관련 절차서·작업지시서 개정 이력 및 최신본 비치 여부 점검",
+            "교육훈련 기록 현황 점검 (미이수 담당자 파악)",
+            "목표 및 추진계획 달성 현황 중간 점검",
+            "현장 정리·정돈 상태 사전 점검",
+        ])
+        + _section("향후 일정 안내", [
+            "D-60: 부서별 자료 요청 및 상세 준비사항 안내 예정",
+            "D-30: 내부심사 일정 및 최종 서류 제출 요청 예정",
+            "D-3:  최종 점검 사항 및 당일 일정 안내 예정",
+        ])
+        + _closing()
+    )
+    return subject, _wrap(f"{iso_type} 사후심사 일정 안내 (D-90)", body, accent)
+
+
+# ── ISO 사후심사 D-3 최종 점검 (3일 전) ──────────────────
+
+def iso_d3(iso_type: str, audit_date: str) -> tuple:
+    is_9001  = "9001" in iso_type
+    accent   = "#007AFF" if is_9001 else "#34C759"
+    sys_name = "품질경영시스템(QMS)" if is_9001 else "환경경영시스템(EMS)"
+    subject  = f"[{iso_type}] ⚠️ 사후심사 D-3 · 최종 점검 안내 · {audit_date}"
+    body = (
+        _greeting(f"{iso_type} {sys_name} 사후심사가 <strong>{audit_date}</strong>, 이제 3일 앞으로 다가왔습니다.")
+        + _callout(
+            f"🚨 &nbsp;<strong>심사일: {audit_date}</strong> — 3일 후입니다. "
+            "아래 최종 점검 사항을 반드시 확인해 주십시오.",
+            "#FF3B30", "#FFF2F1"
+        )
+        + _section("심사 당일 필수 준비사항 (최종 점검)", [
+            "모든 제출 서류 최종본 인쇄·정리 완료",
+            "담당 부서 기록물 최신화 완료 확인",
+            "현장 정리·정돈 및 안전표식 최종 점검",
+            "직원 인터뷰 대비 — 각자 역할 및 절차 재숙지",
+            "이전 내부심사 부적합 시정조치 증빙 최종 완비",
+        ])
+        + _callout(
+            "📞 &nbsp;당일 부재 또는 긴급 상황 발생 시 즉시 "
+            "<strong>장정록 책임 (041-000-0000)</strong>으로 연락해 주시기 바랍니다.",
+            "#007AFF", "#F0F7FF"
+        )
+        + _closing()
+    )
+    return subject, _wrap(f"{iso_type} 사후심사 D-3 최종 점검", body, "#FF3B30")
 
 
 # ── ISO 사후심사 D-60 공지 ────────────────────────────────
@@ -299,6 +436,64 @@ def iso_d30(iso_type: str, audit_date: str, internal_date: str) -> tuple:
     return subject, _wrap(f"{iso_type} 내부심사 안내 및 자료 요청 (D-30)", body, accent)
 
 
+# ── 환경표지인증(EL) 갱신 D-90 안내 (3달 전) ─────────────
+
+def el_d90(product_name: str, cert_end: str) -> tuple:
+    subject = f"[환경표지인증] 갱신 3개월 전 안내 · {product_name} · 만료 {cert_end}"
+    body = (
+        _greeting(f"관리 중인 환경표지인증 제품 <strong>{product_name}</strong>의 갱신 기한이 약 3개월 앞으로 다가왔습니다.")
+        + _info_table([
+            ("인증 제품",   f"<strong>{product_name}</strong>"),
+            ("인증 만료일", f"<strong>{cert_end}</strong>"),
+            ("발급기관",    "한국환경산업기술원 (KEITI)"),
+            ("신청 사이트", "el.keiti.re.kr"),
+        ])
+        + _callout(
+            "📅 &nbsp;인증 만료까지 <strong>약 3개월</strong>이 남았습니다. "
+            "지금부터 갱신 준비를 시작해 주시기 바랍니다.",
+            "#007AFF", "#F0F7FF"
+        )
+        + _section("3개월 전 사전 점검 사항", [
+            "현재 인증 범위(제품 목록) 변경 여부 확인",
+            "시험성적서 유효기간 확인 (갱신 전 만료 시 재시험 필요)",
+            "원부자재 변경 이력 확인 (변경 시 추가 서류 필요)",
+            "기존 인증 신청 서류 현황 파악 (재활용 가능 서류 정리)",
+        ])
+        + _section("향후 일정 안내", [
+            "D-60: 갱신 필수 서류 목록 및 제출 요청 안내 예정",
+        ])
+        + _closing()
+    )
+    return subject, _wrap("환경표지인증 갱신 일정 안내 (D-90)", body, "#007AFF")
+
+
+# ── 환경표지인증(EL) 갱신 D-3 최종 안내 ──────────────────
+
+def el_d3(product_name: str, cert_end: str) -> tuple:
+    subject = f"[환경표지인증] ⚠️ 갱신 신청 마감 임박 · {product_name} · 만료 {cert_end}"
+    body = (
+        _greeting(f"환경표지인증 <strong>{product_name}</strong>의 만료일 <strong>{cert_end}</strong>이 3일 앞으로 다가왔습니다.")
+        + _callout(
+            f"🚨 &nbsp;만료일 <strong>{cert_end}</strong>까지 3일 남았습니다. "
+            "갱신 신청이 완료되지 않은 경우 즉시 KEITI에 연락하여 처리 상황을 확인해 주십시오.",
+            "#FF3B30", "#FFF2F1"
+        )
+        + _section("즉시 확인 사항", [
+            "KEITI 갱신 신청 접수 완료 여부 확인 (el.keiti.re.kr)",
+            "미신청 시: 즉시 KEITI 담당자에게 연락 (사정 설명 및 조치 요청)",
+            "신청 완료 시: 심사 일정 확인 및 현장 방문 준비",
+            "인증 만료 후에는 환경표지 마크 사용 즉시 중단 필요",
+        ])
+        + _callout(
+            "📞 &nbsp;긴급 문의: <strong>장정록 책임 (041-000-0000)</strong> / "
+            "KEITI 환경표지팀 (02-2284-1151)",
+            "#007AFF", "#F0F7FF"
+        )
+        + _closing()
+    )
+    return subject, _wrap("환경표지인증 갱신 마감 임박 안내 (D-3)", body, "#FF3B30")
+
+
 # ── 환경표지인증(EL) 갱신 D-60 안내 ──────────────────────
 
 def el_d60(product_name: str, cert_end: str, apply_deadline: str) -> tuple:
@@ -335,6 +530,67 @@ def el_d60(product_name: str, cert_end: str, apply_deadline: str) -> tuple:
         + _closing()
     )
     return subject, _wrap("환경표지인증 갱신 일정 안내 (D-60)", body, "#007AFF")
+
+
+# ── Vegan 인증 갱신 D-90 안내 (3달 전) ──────────────────
+
+def vegan_d90(cert_type: str, product_scope: str, cert_end: str) -> tuple:
+    is_kv  = "KV" in cert_type or "한국" in cert_type
+    accent = "#AF52DE"
+    issuer = "한국비건인증원 (KV)" if is_kv else "The Vegan Society (영국)"
+    subject = f"[Vegan 인증] 갱신 3개월 전 안내 · {cert_type} · 만료 {cert_end}"
+    body = (
+        _greeting(f"관리 중인 <strong>{cert_type}</strong> 인증의 갱신 기한이 약 3개월 앞으로 다가왔습니다.")
+        + _info_table([
+            ("인증 기관",   issuer),
+            ("인증 범위",   product_scope),
+            ("인증 만료일", f"<strong>{cert_end}</strong>"),
+        ])
+        + _callout(
+            "📅 &nbsp;인증 만료까지 <strong>약 3개월</strong>이 남았습니다. "
+            "원료·제조공정 변경 여부를 지금 점검해 주시기 바랍니다.",
+            accent, "#FAF5FF"
+        )
+        + _section("3개월 전 사전 점검 사항", [
+            "원료 변경 이력 확인 (변경 시 인증기관 사전 신고 필수)",
+            "공급사 변경 여부 확인 (신규 공급사 비건 적합성 검토 필요)",
+            "인증 마크 사용 현황 및 라벨 디자인 최신 가이드라인 적용 여부 확인",
+            "동물 실험 관련 내부 확인서 최신화 여부 점검",
+        ])
+        + _section("향후 일정 안내", [
+            "D-60: 갱신 필수 서류 목록 및 제출 요청 안내 예정",
+        ])
+        + _closing()
+    )
+    return subject, _wrap(f"{cert_type} 갱신 일정 안내 (D-90)", body, accent)
+
+
+# ── Vegan 인증 갱신 D-3 최종 안내 ────────────────────────
+
+def vegan_d3(cert_type: str, cert_end: str) -> tuple:
+    is_kv  = "KV" in cert_type or "한국" in cert_type
+    issuer = "한국비건인증원 (KV)" if is_kv else "The Vegan Society (영국)"
+    subject = f"[Vegan 인증] ⚠️ 갱신 마감 임박 · {cert_type} · 만료 {cert_end}"
+    body = (
+        _greeting(f"<strong>{cert_type}</strong> 인증 만료일 <strong>{cert_end}</strong>이 3일 앞으로 다가왔습니다.")
+        + _callout(
+            f"🚨 &nbsp;만료일 <strong>{cert_end}</strong>까지 3일 남았습니다. "
+            "갱신 신청 완료 여부를 즉시 확인해 주십시오.",
+            "#FF3B30", "#FFF2F1"
+        )
+        + _section("즉시 확인 사항", [
+            f"{issuer}에 갱신 신청 접수 완료 여부 확인",
+            "미신청 시: 즉시 인증기관 담당자에게 연락하여 긴급 처리 요청",
+            "인증 만료 후 즉시 해당 인증 마크 사용 중단 필요",
+            "수출 계약 중인 경우 바이어에게 사전 안내 검토",
+        ])
+        + _callout(
+            "📞 &nbsp;긴급 문의: <strong>장정록 책임 (041-000-0000)</strong>",
+            "#007AFF", "#F0F7FF"
+        )
+        + _closing()
+    )
+    return subject, _wrap(f"{cert_type} 갱신 마감 임박 안내 (D-3)", body, "#FF3B30")
 
 
 # ── Vegan 인증 갱신 D-60 안내 ────────────────────────────

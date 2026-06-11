@@ -9,9 +9,14 @@ from pathlib import Path
 from utils.dday import calc_dday, dday_label
 from utils.email_sender import (
     send_emails, test_connection,
-    fsc_d60, fsc_d30,
-    iso_d60, iso_d30,
-    el_d60, vegan_d60,
+    fsc_d90, fsc_d60, fsc_d30, fsc_d3,
+    iso_d90, iso_d60, iso_d30, iso_d3,
+    el_d90, el_d60, el_d3,
+    vegan_d90, vegan_d60, vegan_d3,
+)
+from utils.auto_scheduler import (
+    load_auto_cfg, save_auto_cfg,
+    _load_log, run_daily_check, start_scheduler,
 )
 
 RECIPIENTS_PATH = "data/recipients.json"
@@ -94,7 +99,9 @@ st.title("📧 알림 관리")
 st.caption("수신자 관리 · SMTP 설정 · 메일 발송")
 st.markdown("---")
 
-tab_recv, tab_smtp, tab_send = st.tabs(["👥 수신자 관리", "⚙️ SMTP 설정", "📤 메일 발송"])
+start_scheduler()
+
+tab_recv, tab_smtp, tab_send, tab_auto = st.tabs(["👥 수신자 관리", "⚙️ SMTP 설정", "📤 메일 발송", "🤖 자동 발송"])
 
 # ══════════════════════════════════════════════════════════
 # TAB 1 — 수신자 관리
@@ -463,3 +470,126 @@ with tab_send:
                         except RuntimeError as e:
                             st.error(str(e))
                 st.html('<hr style="border:none;border-top:1px solid #E8E8ED;margin:10px 0;"/>')
+
+# ══════════════════════════════════════════════════════════
+# TAB 4 — 자동 발송
+# ══════════════════════════════════════════════════════════
+with tab_auto:
+    st.subheader("🤖 자동 발송 설정")
+
+    auto_cfg = load_auto_cfg()
+
+    st.html(
+        '<div style="background:#F0F7FF;border-left:3px solid #007AFF;border-radius:0 12px 12px 0;'
+        'padding:16px 20px;font-size:13px;color:#3D3D3D;line-height:1.8;margin-bottom:20px;">'
+        '<strong>자동 발송 동작 원리</strong><br>'
+        '앱이 실행 중인 동안 매일 설정한 시각에 D-day를 자동 체크하여 해당 메일을 발송합니다.<br>'
+        '• <strong>D-90 (3달 전)</strong>: 심사/갱신 일정 도래 사전 안내<br>'
+        '• <strong>D-60 (2달 전)</strong>: 부서별 자료 요청 안내<br>'
+        '• <strong>D-30 (1달 전)</strong>: 내부심사 일정 및 최종 자료 제출 요청<br>'
+        '• <strong>D-3  (3일 전)</strong>: 최종 점검 및 당일 일정 안내<br>'
+        '<span style="color:#8E8E93;font-size:12px;">※ Streamlit Cloud 무료 플랜은 앱이 비활성 시 절전 모드가 됩니다. '
+        '안정적인 자동 발송을 위해 앱을 주기적으로 방문하거나 유료 플랜을 사용하세요.</span>'
+        '</div>'
+    )
+
+    is_enabled = st.toggle(
+        "자동 발송 활성화",
+        value=auto_cfg.get("enabled", False),
+        key="auto_send_toggle",
+    )
+
+    col_h, _ = st.columns([2, 8])
+    send_hour = col_h.number_input(
+        "매일 발송 시각 (시, 0~23)",
+        min_value=0, max_value=23,
+        value=int(auto_cfg.get("hour", 8)),
+        key="auto_hour",
+    )
+
+    st.markdown("---")
+    st.subheader("🔐 자동 발송용 SMTP 설정")
+    st.caption("자동 발송은 세션과 무관하게 실행되므로, SMTP 정보를 여기에 별도 저장합니다.")
+
+    auto_smtp = auto_cfg.get("smtp", {})
+    col1, col2 = st.columns([4, 1])
+    a_host = col1.text_input("SMTP 서버", value=auto_smtp.get("host", "smtp.gmail.com"), key="auto_host")
+    a_port = col2.text_input("포트", value=auto_smtp.get("port", "587"), key="auto_port")
+    a_user = st.text_input("발신 이메일", value=auto_smtp.get("user", ""), key="auto_user")
+    a_pass = st.text_input("앱 비밀번호", type="password", value=auto_smtp.get("password", ""), key="auto_pass")
+    a_name = st.text_input("발신자 이름", value=auto_smtp.get("sender_name", "한솔제지 품질환경팀"), key="auto_name")
+
+    st.html(
+        '<div style="background:#FFF8EF;border-left:3px solid #FF9500;border-radius:0 10px 10px 0;'
+        'padding:12px 16px;font-size:12px;color:#6E6E73;margin-top:4px;">'
+        '⚠️ SMTP 비밀번호가 서버 내 파일에 저장됩니다. 사내 전용 서버 또는 Streamlit Cloud 비공개 환경에서만 사용하세요.'
+        '</div>'
+    )
+
+    col_save2, col_test2, _ = st.columns([2, 2, 6])
+
+    if col_save2.button("💾 자동 발송 저장", use_container_width=True, type="primary", key="auto_save"):
+        new_cfg = {
+            "enabled": is_enabled,
+            "hour":    int(send_hour),
+            "smtp": {
+                "host":        a_host,
+                "port":        a_port,
+                "user":        a_user,
+                "password":    a_pass,
+                "sender_name": a_name,
+            }
+        }
+        save_auto_cfg(new_cfg)
+        start_scheduler()
+        status = "활성화" if is_enabled else "비활성화"
+        st.success(f"✅ 자동 발송이 {status}되었습니다. 매일 {send_hour:02d}:00에 D-day를 체크합니다.")
+
+    if col_test2.button("🔌 연결 테스트", use_container_width=True, key="auto_test"):
+        try:
+            test_connection({"host": a_host, "port": a_port, "user": a_user, "password": a_pass})
+            st.success("✅ SMTP 연결 성공!")
+        except Exception as e:
+            st.error(f"❌ 연결 실패: {e}")
+
+    st.markdown("---")
+    st.subheader("▶ 지금 즉시 D-day 체크 & 발송")
+    st.caption("저장된 설정으로 오늘 날짜 기준 D-day를 체크하고 해당되는 메일을 지금 바로 발송합니다.")
+    if st.button("🚀 지금 바로 체크 & 발송", type="primary", key="run_now"):
+        with st.spinner("D-day 체크 중..."):
+            try:
+                run_daily_check()
+                st.success("✅ 체크 완료. 해당 D-day 메일이 발송되었습니다. 아래 발송 기록을 확인하세요.")
+            except Exception as e:
+                st.error(f"오류 발생: {e}")
+
+    st.markdown("---")
+    st.subheader("📋 자동 발송 기록")
+    log = _load_log()
+    sent_list  = sorted(log.get("sent", []),   key=lambda x: x.get("time", ""), reverse=True)
+    error_list = sorted(log.get("errors", []), key=lambda x: x.get("time", ""), reverse=True)
+
+    if not sent_list:
+        st.caption("아직 자동 발송 기록이 없습니다.")
+    else:
+        for e in sent_list[:30]:
+            st.html(
+                f'<div style="display:flex;align-items:flex-start;gap:12px;padding:10px 0;'
+                f'border-bottom:1px solid #F0F0F0;">'
+                f'<span style="font-size:18px;">✅</span>'
+                f'<div>'
+                f'<div style="font-size:13px;font-weight:600;color:#1D1D1F;">{e.get("subject","")}</div>'
+                f'<div style="font-size:12px;color:#8E8E93;margin-top:2px;">{e.get("time","")}</div>'
+                f'</div></div>'
+            )
+
+    if error_list:
+        st.markdown("---")
+        with st.expander(f"❌ 발송 오류 기록 ({len(error_list)}건)", expanded=False):
+            for e in error_list[:20]:
+                st.html(
+                    f'<div style="padding:8px 0;border-bottom:1px solid #FFE5E5;">'
+                    f'<div style="font-size:12px;font-weight:600;color:#FF3B30;">{e.get("key","")}</div>'
+                    f'<div style="font-size:12px;color:#6E6E73;">{e.get("time","")} — {e.get("error","")}</div>'
+                    f'</div>'
+                )
