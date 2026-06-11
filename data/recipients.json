@@ -1,0 +1,7 @@
+{
+  "recipients": [
+    {"id": "r001", "name": "홍길동", "email": "hong@example.com", "department": "생산팀"},
+    {"id": "r002", "name": "이영희", "email": "lee@example.com",  "department": "구매팀"},
+    {"id": "r003", "name": "박철수", "email": "park@example.com", "department": "영업팀"}
+  ]
+}
