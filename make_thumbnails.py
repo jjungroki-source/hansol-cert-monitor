@@ -256,8 +256,18 @@ def make_thumb3():
     # Left panel - dark
     draw.rectangle([0, 0, W//2, H], fill=(18,18,28))
 
-    # Left content
-    draw.text((100, 130), "심사 전날까지", font=F("bold_kr",78), fill=(200,210,230))
+    # Left content — ROKI brand badge
+    roki_bb = draw.textbbox((0,0), "ROKI", font=F("bold_en", 28))
+    roki_w  = roki_bb[2] - roki_bb[0]
+    badge_w = roki_w + 80
+    draw.rounded_rectangle([100, 68, 100+badge_w, 68+48], radius=24,
+                            fill=(100,120,255,220))
+    draw.text((124, 78), "ROKI", font=F("bold_en", 28), fill=(255,255,255))
+    # dot separator
+    draw.ellipse([100+badge_w+16, 86, 100+badge_w+24, 94], fill=(100,120,255))
+    draw.text((100+badge_w+36, 76), "자동 알림 시스템", font=F("reg_kr", 22), fill=(160,170,200))
+
+    draw.text((100, 140), "심사 전날까지", font=F("bold_kr",78), fill=(200,210,230))
     draw.text((100, 224), "까먹어도 괜찮아.", font=F("bold_kr",78), fill=(255,255,255))
 
     # accent underline
