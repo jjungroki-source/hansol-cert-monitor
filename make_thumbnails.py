@@ -257,66 +257,73 @@ def make_thumb3():
     draw.rectangle([0, 0, W//2, H], fill=(18,18,28))
 
     # Left content
-    draw.text((100, 160), "스마트", font=F("bold_kr",72), fill=(100,120,255))
-    draw.text((100, 248), "자동 알림", font=F("bold_kr",72), fill=(255,255,255))
-    draw.text((100, 350), "Auto Email Notification", font=F("ui_bold",28), fill=(160,170,200))
+    draw.text((100, 140), "인증 심사일이", font=F("bold_kr",72), fill=(200,210,230))
+    draw.text((100, 228), "다가오면 알아서", font=F("bold_kr",72), fill=(255,255,255))
+    draw.text((100, 316), "담당자에게 자동 발송", font=F("bold_kr",64), fill=(100,120,255))
+    draw.text((100, 400), "FSC · ISO · 환경표지 · Vegan 전 인증 지원", font=F("ui_bold",24), fill=(160,170,200))
 
-    draw.line([(100,410),(460,410)], fill=(100,120,255), width=2)
+    draw.line([(100,448),(500,448)], fill=(100,120,255), width=2)
 
-    draw.text((100, 440), "심사 일정이 다가오면", font=F("reg_kr",26), fill=(200,210,230))
-    draw.text((100, 480), "자동으로 담당자에게 메일 발송", font=F("bold_kr",26), fill=(255,255,255))
+    draw.text((100, 470), "매일 오전 지정 시각에 D-day를 자동 체크",   font=F("reg_kr",22), fill=(200,210,230))
+    draw.text((100, 506), "중복 발송 방지 · SMTP 서버 직접 연동",       font=F("reg_kr",22), fill=(200,210,230))
 
     # Timeline
     stages = [
-        ("D-90", "일정 도래 안내", "#34C759"),
-        ("D-60", "자료 요청",      "#FF9500"),
-        ("D-30", "내부심사 안내",  "#FF9F0A"),
-        ("D-3",  "최종 점검",      "#FF3B30"),
+        ("D-90", "3개월 전\n일정 안내",  "#34C759"),
+        ("D-60", "2개월 전\n자료 요청",  "#FF9500"),
+        ("D-30", "1개월 전\n내부심사",   "#FF9F0A"),
+        ("D-3",  "3일 전\n최종점검",     "#FF3B30"),
     ]
     ty = 600
     for i, (dday, label, color) in enumerate(stages):
         tx = 100 + i * 190
         r,g,b = int(color[1:3],16), int(color[3:5],16), int(color[5:7],16)
-        draw.ellipse([tx, ty, tx+64, ty+64], fill=(r,g,b))
-        draw.text((tx+8, ty+12), dday, font=F("bold_en",20), fill=(255,255,255))
-        draw.text((tx-8, ty+76), label, font=F("reg_kr",18), fill=(200,210,230))
+        draw.ellipse([tx, ty, tx+68, ty+68], fill=(r,g,b))
+        draw.text((tx+6, ty+14), dday, font=F("bold_en",20), fill=(255,255,255))
+        for li, line in enumerate(label.split("\n")):
+            draw.text((tx-6, ty+80+li*26), line, font=F("reg_kr",18), fill=(200,210,230))
         if i < 3:
-            draw.line([(tx+64, ty+32),(tx+190, ty+32)], fill=(80,80,120), width=2)
+            draw.line([(tx+68, ty+34),(tx+190, ty+34)], fill=(80,80,120), width=2)
 
-    # Right panel - email preview cards
+    # Right panel - email preview cards (실제 이메일 제목 기반)
     rx = W//2 + 60
     emails = [
-        ("[FSC CoC] 사후심사 D-90 안내",   "심사 3개월 전 사전 안내",           "#34C759"),
-        ("[ISO 9001] 자료 요청 D-60",       "부서별 준비 서류 제출 요청",         "#007AFF"),
-        ("[환경표지] 내부심사 일정 D-30",   "내부심사 일정 및 최종 서류 요청",    "#FF9500"),
-        ("[FSC CoC] 최종 점검 D-3",         "심사 3일 전 최종 준비 확인",         "#FF3B30"),
+        ("[FSC CoC 인증] 사후심사 3개월 전 사전 안내",    "심사 예정일 확인 · 향후 일정 사전 공유",       "#34C759"),
+        ("[ISO 9001] 사후심사 일정 사전 안내",             "담당부서 자료 준비 요청 · 체크리스트 첨부",    "#007AFF"),
+        ("[환경표지인증] 내부심사 일정 안내 및 자료 요청", "내부심사 일정 확정 · 갱신 신청서류 준비",     "#FF9500"),
+        ("[FSC CoC 인증] ⚠️ 사후심사 D-3 최종 점검",     "심사 당일 준비 목록 · 긴급 연락처 안내",       "#FF3B30"),
     ]
-    ey = 140
+    ey = 100
     for i, (title, body, color) in enumerate(emails):
         r,g,b = int(color[1:3],16), int(color[3:5],16), int(color[5:7],16)
 
         sh = Image.new("RGBA", (W,H), (0,0,0,0))
         sd = ImageDraw.Draw(sh)
-        sd.rounded_rectangle([rx+4, ey+8, rx+740+4, ey+118+8], radius=16, fill=(0,0,0,30))
+        sd.rounded_rectangle([rx+4, ey+8, rx+760+4, ey+124+8], radius=16, fill=(0,0,0,30))
         sh = sh.filter(ImageFilter.GaussianBlur(10))
         img = Image.alpha_composite(img.convert("RGBA"), sh).convert("RGB")
         draw = ImageDraw.Draw(img)
 
-        draw.rounded_rectangle([rx, ey, rx+740, ey+118], radius=16, fill=(255,255,255))
-        draw.rounded_rectangle([rx, ey, rx+6, ey+118], radius=16, fill=(r,g,b))
-        draw.rectangle([rx+3, ey, rx+9, ey+118], fill=(r,g,b))
-        draw.rectangle([rx+6, ey, rx+12, ey+118], fill=(255,255,255))
+        draw.rounded_rectangle([rx, ey, rx+760, ey+124], radius=16, fill=(255,255,255))
+        draw.rounded_rectangle([rx, ey, rx+6, ey+124], radius=16, fill=(r,g,b))
+        draw.rectangle([rx+3, ey, rx+9, ey+124], fill=(r,g,b))
+        draw.rectangle([rx+6, ey, rx+12, ey+124], fill=(255,255,255))
 
-        draw.text((rx+28, ey+18), title, font=F("bold_kr",21), fill=(29,29,31))
-        draw.text((rx+28, ey+56), body, font=F("reg_kr",18), fill=(110,110,115))
-        draw.text((rx+28, ey+84), "수신: 유관부서 담당자 전원", font=F("reg_kr",16), fill=(180,180,190))
+        # 태그 뱃지
+        tag_labels = ["D-90", "D-60", "D-30", "D-3"]
+        tag = tag_labels[i]
+        tbb = draw.textbbox((0,0), tag, font=F("bold_en",16))
+        tw2 = tbb[2]-tbb[0]
+        draw.rounded_rectangle([rx+680, ey+16, rx+680+tw2+20, ey+42], radius=10, fill=(r,g,b,40))
+        draw.text((rx+690, ey+20), tag, font=F("bold_en",16), fill=(r,g,b))
 
-        # Envelope icon
-        draw.text((rx+690, ey+38), "✉", font=F("reg_en",36), fill=(r,g,b,180))
-        ey += 148
+        draw.text((rx+28, ey+18), title, font=F("bold_kr",20), fill=(29,29,31))
+        draw.text((rx+28, ey+58), body, font=F("reg_kr",17), fill=(110,110,115))
+        draw.text((rx+28, ey+90), "수신: 품질환경팀 · 생산팀 · 구매팀 담당자", font=F("reg_kr",15), fill=(180,180,190))
+        ey += 154
 
     # Bottom brand
-    draw.text((rx, H-80), "한솔제지(주) 천안공장 품질환경팀", font=F("reg_kr",22), fill=(160,160,180))
+    draw.text((rx, H-60), "한솔제지(주) 천안공장  ·  품질환경팀 자동 발송 시스템", font=F("reg_kr",20), fill=(160,160,180))
 
     img.save(f"{OUT}/thumb3_email.png", "PNG", optimize=True)
     print("thumb3 done")
